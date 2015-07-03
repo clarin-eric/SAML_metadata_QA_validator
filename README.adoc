@@ -5,9 +5,9 @@
 :sectnums:
 :source-highlighter: pygments
 
-An Apache Ant project in which ISO Schematron is used to validate SAML metadata about Service Providers, as published by the CLARIN Service Provider Federation.
+An Apache Ant project in which ISO Schematron is used to validate SAML metadata about Service Providers, as published by the https://www.clarin.eu/spf[CLARIN Service Provider Federation].
 
-The aim of this validation effort, beyond XML Schema (XSD), is that the SAML metadata XSDs have some weaknesses (e.g., regarding md:ContactPerson element), and that validation beyond basic formal validity has proven indispensable for non-technical policy adherence and interoperability of SAML metadata across identity federations and SAML implementations.
+The aim of this validation effort, beyond XML Schema (XSD), is that the SAML metadata XSDs have some weaknesses (e.g., regarding md:ContactPerson the element), and that validation beyond basic formal validity has proven indispensable for non-technical policy adherence and interoperability of SAML metadata across identity federations and SAML implementations.
 
 == Requirements
 
@@ -20,6 +20,6 @@ Clone the repository, `cd` to it, and run `ant -v`.
 
 == Output
 
-* A validation stylesheet based on the Schematron QA validation suite[SAML_metadata_QA_validator.sch].
+* A validation stylesheet based on the link:SAML_metadata_QA_validator.sch[Schematron QA validation suite].
 * http://www.schematron.com/validators.html[SVRL reports] for https://infra.clarin.eu/aai/prod_md_about_spf_sps[prod_md_about_spf_sps] and https://infra.clarin.eu/aai/md_about_spf_sps[md_about_spf_sps]
 * Files in a simplified XML format (based on the SVRL reports) that Google Sheets can process and display. A Google Sheets spreadsheet presents the current version of output as produced on infra.clarin.eu to human consumers. This spreadsheet is made available to SP operators and other stakeholders.
