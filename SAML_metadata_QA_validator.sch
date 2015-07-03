@@ -115,7 +115,7 @@
     </xsl:function>
     <sch:title>SAML metadata QA validator</sch:title>
     <sch:pattern>
-        <sch:title>DP CoCo Entity Category</sch:title>
+        <sch:title>GÉANT Data Protection Code of Conduct</sch:title>
         <sch:rule
             context="md:EntityDescriptor[md:SPSSODescriptor]">
             <sch:let
