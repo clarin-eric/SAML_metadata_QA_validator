@@ -84,7 +84,7 @@
             select="fn:string-length($display_name)"
             as="xs:integer"/>
         <xsl:sequence
-            select="(not(empty($description)) and not(empty($display_name_length)) and $display_name_length >= 5 and $display_name_length &lt;= 33 and $description_length >= 20 and $description_length &lt;= 100, $display_name, $display_name_length, $description, $description_length)"/>
+            select="(not(empty($description)) and not(empty($display_name)) and $display_name_length >= 5 and $display_name_length &lt;= 33 and $description_length >= 20 and $description_length &lt;= 100, $display_name, $display_name_length, $description, $description_length)"/>
     </xsl:function>
     <xsl:function
         name="local:is_https_URL"
