@@ -375,7 +375,7 @@
                 test="md:AssertionConsumerService[@Binding='urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST']">
                 <sch:value-of
                     select="$entityID"/>
-                Invalid or missing md:AssertionConsumerService[@Binding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'] .
+                Invalid or missing ‘md:SPSSODescriptor/md:AssertionConsumerService[@Binding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST']’.
                 <sch:emph>Completely a requirement for the REFEDS Research and Scholarship Entity Category (4.3.1). Completely a guideline for the CLARIN Service Provider Federation. </sch:emph>
             </sch:assert>
             <sch:assert
