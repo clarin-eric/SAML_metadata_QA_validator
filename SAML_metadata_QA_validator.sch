@@ -210,7 +210,7 @@
                 <sch:value-of
                     select="$entityID"/>
                 Invalid or missing ‘mdui:PrivacyStatementURL and ‘mdui:InformationURL’ under ‘md:SPSSODescriptor/md:Extensions/mdui:UIInfo’, both with attribute ‘xml:lang='en'’, or any of their values are not valid HTTP URLs. 
-                <sch:emph>Partially a requirement for the GÉANT Data Protection Code of Conduct Entity Category. Partially a requirment for the REFEDS Research and Scholarship Entity Category (4.3.3). Completely a guideline for the CLARIN Service Provider Federation. </sch:emph>
+                <sch:emph>Partially a requirement for the GÉANT Data Protection Code of Conduct Entity Category. Partially a requirement for the REFEDS Research and Scholarship Entity Category (4.3.3). Completely a guideline for the CLARIN Service Provider Federation. </sch:emph>
             </sch:assert>
         </sch:rule>
     </sch:pattern>
@@ -244,7 +244,7 @@
                 value="../@entityID"/>
             <sch:let
                 name="SAML_2_requested_attributes_nodes"
-                value="md:AttributeConsumingService[md:ServiceName/@xml:lang='en' and md:RequestedAttribute[@NameFormat='urn:oasis:names:tc:SAML:2.0:attrname-format:uri'] and md:ServiceDescription/@xml:lang='en']/md:RequestedAttribute"/>
+                value="md:AttributeConsumingService[md:ServiceName/@xml:lang='en' and md:RequestedAttribute[@NameFormat='urn:oasis:names:tc:SAML:2.0:attrname-format:uri'] and md:ServiceDescription/@xml:lang='en']/md:RequestedAttribute[@NameFormat='urn:oasis:names:tc:SAML:2.0:attrname-format:uri']"/>
             <sch:assert
                 test="exists($SAML_2_requested_attributes_nodes)">
                 <sch:value-of
