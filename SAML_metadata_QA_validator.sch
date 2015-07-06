@@ -155,13 +155,13 @@
     <sch:pattern>
         <sch:title>Logo</sch:title>
         <sch:rule
-            context="md:EntityDescriptor[md:SPSSODescriptor]">
+            context="md:EntityDescriptor/md:SPSSODescriptor">
             <sch:let
                 name="entityID"
-                value="@entityID"/>
+                value="../@entityID"/>
             <sch:let
                 name="Logo_nodes"
-                value="for $URL in md:SPSSODescriptor/md:Extensions/mdui:UIInfo/mdui:Logo/text() return $URL cast as xs:anyURI"/>
+                value="for $URL in md:Extensions/mdui:UIInfo/mdui:Logo/text() return $URL cast as xs:anyURI"/>
             <sch:assert
                 test="exists($Logo_nodes) and (every $URL in $Logo_nodes satisfies local:is_https_URL($URL))">
                 <sch:value-of
@@ -177,10 +177,10 @@
         id="mdui_text">
         <sch:title>Metadata Extensions for Login and Discovery User Interface: texts</sch:title>
         <sch:rule
-            context="md:EntityDescriptor/md:SPSSODescriptor/md:Extensions/mdui:UIInfo[1]">
+            context="md:EntityDescriptor/md:SPSSODescriptor">
             <sch:let
                 name="entityID"
-                value="../../../@entityID"/>
+                value="../@entityID"/>
             <sch:let
                 name="result"
                 value="local:check_mdui_elements($language_code, .)"/>
@@ -201,16 +201,23 @@
     <sch:pattern>
         <sch:title>Metadata Extensions for Login and Discovery User Interface: URLs</sch:title>
         <sch:rule
-            context="md:EntityDescriptor/md:SPSSODescriptor/md:Extensions/mdui:UIInfo[1]">
+            context="md:EntityDescriptor/md:SPSSODescriptor">
             <sch:let
                 name="entityID"
-                value="../../../@entityID"/>
+                value="../@entityID"/>
             <sch:assert
-                test="every $URL in (mdui:PrivacyStatementURL[xml:lang='en']/text(), mdui:InformationURL[xml:lang='en']/text()) satisfies local:is_HTTP_URL($URL)">
+                test="every $URL in md:Extensions/mdui:UIInfo/mdui:PrivacyStatementURL[xml:lang='en']/text() satisfies local:is_HTTP_URL($URL)">
                 <sch:value-of
                     select="$entityID"/>
-                Invalid or missing ‘mdui:PrivacyStatementURL and ‘mdui:InformationURL’ under ‘md:SPSSODescriptor/md:Extensions/mdui:UIInfo’, both with attribute ‘xml:lang='en'’, or any of their values are not valid HTTP URLs. 
-                <sch:emph>Partially a requirement for the GÉANT Data Protection Code of Conduct Entity Category. Partially a requirement for the REFEDS Research and Scholarship Entity Category (4.3.3). Completely a guideline for the CLARIN Service Provider Federation. </sch:emph>
+                Invalid or missing ‘mdui:PrivacyStatementURL’ under ‘md:SPSSODescriptor/md:Extensions/mdui:UIInfo’, both with attribute ‘xml:lang='en'’, or any of their values are not valid HTTP URLs. 
+                <sch:emph>Completely a requirement for the GÉANT Data Protection Code of Conduct Entity Category (2.3). Completely a guideline for the CLARIN Service Provider Federation. Please ensure that your privacy policy author(s) follow(s) https://wiki.refeds.org/display/CODE/Privacy+policy+guidelines+for+Service+Providers .</sch:emph>
+            </sch:assert>
+            <sch:assert
+                test="every $URL in md:Extensions/mdui:UIInfo/mdui:InformationURL[xml:lang='en']/text() satisfies local:is_HTTP_URL($URL)">
+                <sch:value-of
+                    select="$entityID"/>
+                Invalid or missing ‘mdui:InformationURL’ under ‘md:SPSSODescriptor/md:Extensions/mdui:UIInfo’, both with attribute ‘xml:lang='en'’, or any of their values are not valid HTTP URLs. 
+                <sch:emph>Completely a requirement for the REFEDS Research and Scholarship Entity Category (4.3.3). Completely a guideline for the CLARIN Service Provider Federation. </sch:emph>
             </sch:assert>
         </sch:rule>
     </sch:pattern>
@@ -271,16 +278,17 @@
     <sch:pattern>
         <sch:title>Explicit specification of Discovery Response and Request Initiator URLs</sch:title>
         <sch:rule
-            context="md:EntityDescriptor/md:SPSSODescriptor/md:Extensions[init:RequestInitiator and idpdisc:DiscoveryResponse]">
+            context="md:EntityDescriptor/md:SPSSODescriptor/md:Extensions">
             <sch:let
                 name="entityID"
                 value="../../@entityID"/>
             <sch:let
                 name="RequestInitiator_nodes"
-                value="for $URL in init:RequestInitiator/@Location return $URL cast as xs:anyURI"/>
+                value="for $URL in init:RequestInitiator/@Location return $URL"/>
             <sch:let
                 name="DiscoveryResponse_nodes"
-                value="for $URL in idpdisc:DiscoveryResponse/@Location return $URL cast as xs:anyURI"/>
+                value="for $URL in idpdisc:DiscoveryResponse/@Location return $URL"/>
+            <!-- cast as xs:anyURI) -->
             <sch:assert
                 test="fn:count($RequestInitiator_nodes)=1 and (every $URL in RequestInitiator_elements satisfies local:is_https_URL($URL))">
                 <sch:value-of
@@ -292,7 +300,7 @@
                 test="fn:count($DiscoveryResponse_nodes)=1 and (every $URL in DiscoveryResponse_elements satisfies local:is_https_URL($URL))">
                 <sch:value-of
                     select="$entityID"/>
-                Missing single element ‘md:SPSSODescriptor/md:Extensions/init:RequestInitiator’.
+                Missing single element ‘md:SPSSODescriptor/md:Extensions/idpdisc:DiscoveryResponse’.
                 <sch:emph>Completely a guideline for the CLARIN Service Provider Federation. See: http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-idp-discovery.html . </sch:emph>
             </sch:assert>
         </sch:rule>
@@ -351,7 +359,7 @@
             name="keys"
             value="for $key in //ds:X509Certificate return fn:normalize-space($key)"/>
         <sch:rule
-            context="md:EntityDescriptor[md:SPSSODescriptor]/md:SPSSODescriptor">
+            context="md:EntityDescriptor/md:SPSSODescriptor">
             <sch:let
                 name="entityID"
                 value="../@entityID"/>
