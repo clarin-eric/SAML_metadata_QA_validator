@@ -128,7 +128,7 @@
                 test="local:has_Entity_Category($DP_CoCo_EC, .)">
                 <sch:value-of
                     select="$entityID"/>
-                There is no node ‘md:Extensions/mdattr:EntityAttributes/saml:Attribute[@Name='http://macedir.org/entity-category' and @NameFormat='urn:oasis:names:tc:SAML:2.0:attrname-format:uri']/saml:AttributeValue/text()’, or no such node has the value 'http://www.geant.net/uri/dataprotection-code-of-conduct/v1'. 
+                There is no node ‘md:Extensions/mdattr:EntityAttributes/saml:Attribute[@Name='http://macedir.org/entity-category' and @NameFormat='urn:oasis:names:tc:SAML:2.0:attrname-format:uri']/saml:AttributeValue/text()’, or no such node has the value 'http://www.geant.net/uri/dataprotection-code-of-conduct/v1'.
                 <sch:emph>Completely a requirement for the GÉANT Data Protection Code of Conduct Entity Category. Completely a guideline for the CLARIN Service Provider Federation. </sch:emph>
             </sch:assert>
         </sch:rule>
@@ -348,26 +348,34 @@
                 test="exists($AssertionConsumerService_nodes) and (every $URL in $AssertionConsumerService_nodes satisfies local:is_https_URL($URL))">
                 <sch:value-of
                     select="$entityID"/>
-                Missing attribute(s) ‘md:SPSSODescriptor/md:AssertionConsumerService/@Location’ or any or their values are not valid https URLs. 
+                Missing attribute(s) ‘md:SPSSODescriptor/md:AssertionConsumerService/@Location’ or any or their values are not valid https URLs.
                 <sch:emph>Completely a guideline for the CLARIN Service Provider Federation. <!-- TODO: --> Required for technical correctness. </sch:emph>
             </sch:assert>
         </sch:rule>
     </sch:pattern>
     <sch:pattern>
         <sch:title>Key duplication</sch:title>
-        <sch:let
-            name="keys"
-            value="for $key in //ds:X509Certificate return fn:normalize-space($key)"/>
         <sch:rule
             context="md:EntityDescriptor/md:SPSSODescriptor">
             <sch:let
+                name="keys"
+                value="for $key in .//ds:X509Certificate return fn:normalize-space($key)"/>
+            <sch:let
                 name="entityID"
                 value="../@entityID"/>
+            <sch:let
+                name="n_distinct_keys"
+                value="count(distinct-values($keys))"/>
+            <sch:let
+                name="n_keys"
+                value="count($keys)"/>
             <sch:assert
-                test="count(distinct-values($keys)) = count($keys)">
+                test="$n_distinct_keys = $n_keys">
                 <sch:value-of
                     select="$entityID"/>
-                Duplicate keys found. 
+                Duplicate keys ‘//ds:X509Certificate’ found. Counted only <sch:value-of
+                    select="$n_distinct_keys"/> distinct keys among <sch:value-of
+                    select="$n_keys"/> keys.
                 <sch:emph>Completely a guideline for the CLARIN Service Provider Federation. </sch:emph>
             </sch:assert>
         </sch:rule>
@@ -375,7 +383,7 @@
     <sch:pattern>
         <sch:title>SAML 2 support</sch:title>
         <sch:rule
-            context="md:EntityDescriptor[md:SPSSODescriptor]/md:SPSSODescriptor">
+            context="md:EntityDescriptor/md:SPSSODescriptor">
             <sch:let
                 name="entityID"
                 value="../@entityID"/>
@@ -390,7 +398,7 @@
                 test="some $supported_protocol in fn:tokenize(@protocolSupportEnumeration, '\s+') satisfies $supported_protocol eq 'urn:oasis:names:tc:SAML:2.0:protocol'">
                 <sch:value-of
                     select="$entityID"/>
-                Invalid or missing attribute ‘md:SPSSODescriptor/@protocolSupportEnumeration’. 
+                Invalid or missing attribute ‘md:SPSSODescriptor/@protocolSupportEnumeration’.
                 <sch:emph>Completely a requirement for the REFEDS Research and Scholarship Entity Category (4.3.1). Completely a guideline for the CLARIN Service Provider Federation. </sch:emph>
             </sch:assert>
         </sch:rule>
