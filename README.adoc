@@ -13,7 +13,7 @@ The aim of this validation effort, beyond XML Schema (XSD), is that the SAML met
 
 * https://ant.apache.org/[Apache Ant 1.9.5];
 * http://www.schematron.com/implementation.html[An ISO Schematron implementation];
-* https://sourceforge.net/projects/saxon/files/Saxon-HE/9.6/[Saxonica Saxon], e.g. [SaxonHE9-6-0-6J].
+* Saxonica Saxon, e.g. https://sourceforge.net/projects/saxon/files/Saxon-HE/9.6/[SaxonHE9-6-0-6J].
 
 == Running
 
