@@ -11,13 +11,13 @@ The aim of this validation effort, beyond XML Schema (XSD), is that the SAML met
 
 == Requirements
 
-* https://ant.apache.org/[Apache Ant 1.9.5];
-* http://www.schematron.com/implementation.html[An ISO Schematron implementation];
-* Saxonica Saxon, e.g. https://sourceforge.net/projects/saxon/files/Saxon-HE/9.6/[SaxonHE9-6-0-6J].
+* https://ant.apache.org/[Apache Ant 1.9.5 or higher];
+* https://github.com/Schematron/schematron[An ISO Schematron implementation];
+* Saxonica Saxon, e.g. https://sourceforge.net/projects/saxon/files/Saxon-HE/9.6/[SaxonHE9-6-0-10J]. Please note that newer versions of Saxon might cause problems.
 
 == Running
 
-Clone the repository, `cd` to it, and run `ant -v`.
+Clone the repository, `cd` to it, adapt the paths in the build.xml to match your system and run `ant -v`.
 
 == Output
 
