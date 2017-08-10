@@ -7,10 +7,10 @@
     </description>
     <property
         name="Schematron_dir_path"
-        location="/opt/Schematron/iso-schematron-xslt2/"/>
+        location="/srv/installations/schematron/"/>
     <property
         name="Saxon_JAR_path"
-        location="/opt/Saxon/SaxonHE9-6-0-6J/saxon9he.jar"/>
+        location="/srv/installations/saxon/saxon9he.jar"/>
     <target
         name="validate">
         <echo>Schematron directory path: ${Schematron_dir_path}</echo>
