@@ -25,6 +25,11 @@
             dest="out/md_about_spf_sps.xml"
             verbose="true"
             usetimestamp="true"/>
+        <get
+            src="https://raw.githubusercontent.com/clarin-eric/SPF-SPs-metadata/master/clarin-sp-metadata.xml"
+            dest="out/source_md_about_spf_sps.xml"
+            verbose="true"
+            usetimestamp="true"/>
         
         <!-- A bug in the quasi-reference implementation of ISO Schematron (https://code.google.com/p/schematron/issues/detail?can=2&start=0&num=100&q=&colspec=ID%20Type%20Status%20Priority%20Milestone%20Owner%20Summary&groupby=&sort=&id=6) prevents parameter identifiers from being expanded within let-bindings in abstract patterns. It appeared impossible to circumvent this issue without either changing that implementation or having a lot of duplication (no abstract rules) or not using abstract rules but an include (fragile, unclear). The patch is in agreement with the ISO Schematron standard and since the original implementation hasn't been updated since 2008, this patch is not only warranted but is also unlikely to cause maintenance issues. -->
         <xslt
@@ -82,6 +87,26 @@
             style="svrlt_to_simple_xml.xsl"
             in="out/prod_md_about_spf_sps.svrlt"
             out="out/prod_md_about_spf_sps_qa.xml">
+            <classpath>
+                <pathelement
+                    location="${Saxon_JAR_path}"/>
+            </classpath>
+        </xslt>
+        <xslt
+            basedir="."
+            style="out/SAML_metadata_QA_validator.xsl"
+            in="out/source_md_about_spf_sps.xml"
+            out="out/source_md_about_spf_sps.svrlt">
+            <classpath>
+                <pathelement
+                    location="${Saxon_JAR_path}"/>
+            </classpath>
+        </xslt>
+        <xslt
+            basedir="."
+            style="svrlt_to_simple_xml.xsl"
+            in="out/source_md_about_spf_sps.svrlt"
+            out="out/source_md_about_spf_sps_qa.xml">
             <classpath>
                 <pathelement
                     location="${Saxon_JAR_path}"/>
