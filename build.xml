@@ -17,7 +17,7 @@
         <echo>Saxon JAR path: ${Saxon_JAR_path}</echo>
         <get
             src="https://raw.githubusercontent.com/clarin-eric/SPF-SPs-metadata/master/clarin-sp-metadata.xml"
-            dest="out/source_md_about_spf_sps.xml"
+            dest="out/master_sps_qa_report.xml"
             verbose="true"
             usetimestamp="true"/>
         
@@ -45,8 +45,8 @@
         <xslt
             basedir="."
             style="out/SAML_metadata_QA_validator.xsl"
-            in="out/source_md_about_spf_sps.xml"
-            out="out/source_md_about_spf_sps.svrlt">
+            in="out/master_sps_qa_report.xml"
+            out="out/master_sps_qa_report.svrlt">
             <classpath>
                 <pathelement
                     location="${Saxon_JAR_path}"/>
@@ -55,8 +55,8 @@
         <xslt
             basedir="."
             style="svrlt_to_simple_xml.xsl"
-            in="out/source_md_about_spf_sps.svrlt"
-            out="out/source_md_about_spf_sps_qa.xml">
+            in="out/master_sps_qa_report.svrlt"
+            out="out/master_sps_qa_report.xml">
             <classpath>
                 <pathelement
                     location="${Saxon_JAR_path}"/>
