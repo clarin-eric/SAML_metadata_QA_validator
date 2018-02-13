@@ -16,8 +16,13 @@
         <echo>Schematron directory path: ${Schematron_dir_path}</echo>
         <echo>Saxon JAR path: ${Saxon_JAR_path}</echo>
         <get
-            src="https://raw.githubusercontent.com/clarin-eric/SPF-SPs-metadata/master/clarin-sp-metadata.xml"
-            dest="out/master_sps_qa_report.xml"
+            src="https://infra.clarin.eu/aai/prod_md_about_spf_sps.xml"
+            dest="out/prod_md_about_spf_sps.xml"
+            verbose="true"
+            usetimestamp="true"/>
+        <get
+            src="https://infra.clarin.eu/aai/md_about_spf_sps.xml"
+            dest="out/md_about_spf_sps.xml"
             verbose="true"
             usetimestamp="true"/>
         
@@ -45,8 +50,8 @@
         <xslt
             basedir="."
             style="out/SAML_metadata_QA_validator.xsl"
-            in="out/master_sps_qa_report.xml"
-            out="out/master_sps_qa_report.svrlt">
+            in="out/md_about_spf_sps.xml"
+            out="out/md_about_spf_sps.svrlt">
             <classpath>
                 <pathelement
                     location="${Saxon_JAR_path}"/>
@@ -55,8 +60,28 @@
         <xslt
             basedir="."
             style="svrlt_to_simple_xml.xsl"
-            in="out/master_sps_qa_report.svrlt"
-            out="out/master_sps_qa_report_results.xml">
+            in="out/md_about_spf_sps.svrlt"
+            out="out/md_about_spf_sps_qa.xml">
+            <classpath>
+                <pathelement
+                    location="${Saxon_JAR_path}"/>
+            </classpath>
+        </xslt>
+        <xslt
+            basedir="."
+            style="out/SAML_metadata_QA_validator.xsl"
+            in="out/prod_md_about_spf_sps.xml"
+            out="out/prod_md_about_spf_sps.svrlt">
+            <classpath>
+                <pathelement
+                    location="${Saxon_JAR_path}"/>
+            </classpath>
+        </xslt>
+        <xslt
+            basedir="."
+            style="svrlt_to_simple_xml.xsl"
+            in="out/prod_md_about_spf_sps.svrlt"
+            out="out/prod_md_about_spf_sps_qa.xml">
             <classpath>
                 <pathelement
                     location="${Saxon_JAR_path}"/>
