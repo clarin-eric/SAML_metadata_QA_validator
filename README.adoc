@@ -23,7 +23,7 @@ For a running example check https://github.com/clarin-eric/SPF-SPs-metadata/blob
 
 == Use cases
 
-The SAML metadata QA validator is currently used by the CI system of the https://github.com/clarin-eric/SPF-SPs-metadata[CLARIN SPF-SPs-metadata repository] to automacticaly generate its https://clarin-eric.github.io/SPF-SPs-metadata/page/master_qa_report.html[QA acessment report] on every commit.
+The SAML metadata QA validator is currently used by the CI system of the https://github.com/clarin-eric/SPF-SPs-metadata[CLARIN SPF-SPs-metadata repository] to automacticaly generate its https://clarin-eric.github.io/SPF-SPs-metadata/page/master_qa_report.html[QA assessment report] on every commit.
 
 This aids CLARIN SP operators and managers, to access the quality and conformance of their metadata with the https://www.clarin.eu/content/guidelines-saml-metadata-about-your-sp[CLARIN SPF metadata guidelines], uppon submmition of their SAML metadata to the repository. It also helps the CLARIN SPF operators to make recomendations and acceptance decisions.
 
