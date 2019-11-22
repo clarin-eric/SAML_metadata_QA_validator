@@ -43,7 +43,7 @@
         <xsl:param
             name="mailto_URI"
             as="xs:anyURI"/>
-        <xsl:value-of
+        <xsl:sequence
             select="fn:matches($mailto_URI cast as xs:string, 'mailto:[^@]+@[^@]+')"/>
     </xsl:function>
     <xsl:function
@@ -55,7 +55,7 @@
         <xsl:param
             name="context"
             as="element()"/>
-        <xsl:value-of
+        <xsl:sequence
             select="fn:exists($context/md:Extensions/mdattr:EntityAttributes/saml:Attribute[@Name='http://macedir.org/entity-category' and @NameFormat='urn:oasis:names:tc:SAML:2.0:attrname-format:uri']/saml:AttributeValue[text()=$attribute_value cast as xs:string])"/>
     </xsl:function>
     <xsl:function
@@ -92,7 +92,7 @@
         <xsl:param
             name="URL"
             as="xs:anyURI"/>
-        <xsl:value-of
+        <xsl:sequence
             select="fn:starts-with($URL, 'https://')"/>
     </xsl:function>
     <xsl:function
@@ -101,7 +101,7 @@
         <xsl:param
             name="URL"
             as="xs:anyURI"/>
-        <xsl:value-of
+        <xsl:sequence
             select="fn:starts-with($URL, 'http://')"/>
     </xsl:function>
     <xsl:function
@@ -110,7 +110,7 @@
         <xsl:param
             name="URL"
             as="xs:anyURI"/>
-        <xsl:value-of
+        <xsl:sequence
             select="local:is_http_URL($URL) or local:is_https_URL($URL)"/>
     </xsl:function>
     <sch:title>SAML metadata QA validator</sch:title>
