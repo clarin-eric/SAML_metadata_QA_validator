@@ -194,7 +194,7 @@
                     select="$result[3]"/>) &lt; 5 or &gt; 33, or description (= ‘<sch:value-of
                     select="$result[4]"/>’) length (= <sch:value-of
                     select="$result[5]"/>) &lt; 20 or &gt; 100.
-                <sch:emph>Partially a requirement for DFN-AAI registration (language code ‘de’). Partially a requirement for the GÉANT Data Protection Code of Conduct Entity Category. Completely a guideline for the CLARIN Service Provider Federation (language code ‘en’). </sch:emph>
+                <sch:emph>Partially a requirement for DFN-AAI registration. Partially a requirement for the GÉANT Data Protection Code of Conduct Entity Category. Completely a guideline for the CLARIN Service Provider Federation. </sch:emph>
             </sch:assert>
         </sch:rule>
     </sch:pattern>
