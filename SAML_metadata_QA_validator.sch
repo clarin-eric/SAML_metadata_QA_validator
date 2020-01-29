@@ -226,13 +226,6 @@
         id="mdui_text_en">
         <sch:param
             name="language_code"
-            value="'de'"/>
-    </sch:pattern>
-    <sch:pattern
-        is-a="mdui_text"
-        id="mdui_text_de">
-        <sch:param
-            name="language_code"
             value="'en'"/>
     </sch:pattern>
     <sch:pattern>
