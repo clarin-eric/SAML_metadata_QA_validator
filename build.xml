@@ -1,7 +1,8 @@
 <project
     name="SAML_metadata_QA_validator"
     default="validate"
-    basedir=".">
+    basedir="."
+    xmlns:unless="ant:unless">
     <description>
         SAML metadata QA validator for the CLARIN Service Provider Federation. Checks for common weaknesses in Security Assertion Markup Language metadata. Currently focused on SAML metadata about Service Providers. The guidelines to prevent these weaknesses can be read at https://www.clarin.eu/content/guidelines-saml-metadata-about-your-sp .
     </description>
@@ -13,10 +14,11 @@
         location="../saxon/saxon9he.jar"/>
     <target
         name="validate">
+        <property unless:set="inFile" name="inFile" value="https://raw.githubusercontent.com/clarin-eric/SPF-SPs-metadata/master/clarin-sp-metadata.xml" />
         <echo>Schematron directory path: ${Schematron_dir_path}</echo>
         <echo>Saxon JAR path: ${Saxon_JAR_path}</echo>
         <get
-            src="https://raw.githubusercontent.com/clarin-eric/SPF-SPs-metadata/master/clarin-sp-metadata.xml"
+            src="${inFile}"
             dest="out/master_sps_qa_report.xml"
             verbose="true"
             usetimestamp="true"/>
