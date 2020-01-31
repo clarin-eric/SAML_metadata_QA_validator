@@ -17,18 +17,21 @@ The aim of this validation effort, beyond XML Schema (XSD), is that the SAML met
 
 == Running
 
-Clone the repository, `cd` to it, adapt the paths in the build.xml to match your system and run `ant -v`.
+. Clone the repository, `cd` to it:
+. Run `ant -v -DinputFile=file:<path_to_saml_metadata_file>`
+
+By default, if `-DinputFile=file:<path_to_saml_metadata_file>` is not specified, `ant -v` will assess the metadata quality of the https://raw.githubusercontent.com/clarin-eric/SPF-SPs-metadata/master/clarin-sp-metadata.xml[the main CLARIN SPF metadata file]. This default is defined in build.xml#L34[build.xml]
 
 For a running example check https://github.com/clarin-eric/SPF-SPs-metadata/blob/master/CI-assets/compile.sh[how Travis CI deploys and runs it] on the https://github.com/clarin-eric/SPF-SPs-metadata[CLARIN SPF-SPs-metadata repository]
 
 == Use cases
 
-The SAML metadata QA validator is currently used by the CI system of the https://github.com/clarin-eric/SPF-SPs-metadata[CLARIN SPF-SPs-metadata repository] to automacticaly generate its https://clarin-eric.github.io/SPF-SPs-metadata/page/master_qa_report.html[QA assessment report] on every commit.
+The SAML metadata QA validator is currently used by the CI system of the https://github.com/clarin-eric/SPF-SPs-metadata[CLARIN SPF-SPs-metadata repository] to automatically generate its https://clarin-eric.github.io/SPF-SPs-metadata/page/master_qa_report.html[QA assessment report] on every commit.
 
 This aids CLARIN SP operators and managers, to access the quality and conformance of their metadata with the https://www.clarin.eu/content/guidelines-saml-metadata-about-your-sp[CLARIN SPF metadata guidelines], uppon submmition of their SAML metadata to the repository. It also helps the CLARIN SPF operators to make recomendations and acceptance decisions.
 
 == Output
 
 * A validation stylesheet based on the link:SAML_metadata_QA_validator.sch[Schematron QA validation suite].
-* http://www.schematron.com/validators.html[SVRL reports] for https://infra.clarin.eu/aai/prod_md_about_spf_sps[prod_md_about_spf_sps] and https://infra.clarin.eu/aai/md_about_spf_sps[md_about_spf_sps].
-* Files in a simplified XML format (based on the SVRL reports) that Google Sheets can process and display. A Google Sheets spreadsheet presents the current version of output as produced on infra.clarin.eu to human consumers. This spreadsheet is made available to SP operators and other stakeholders.
+* http://www.schematron.com/validators.html[SVRL reports] for the specified `inputFile`, or by default for https://raw.githubusercontent.com/clarin-eric/SPF-SPs-metadata/master/clarin-sp-metadata.xml[the main CLARIN SPF metadata file].
+* Files in a simplified XML format (based on the SVRL reports) that can be processed and displayed by Google Sheets or by the https://clarin-eric.github.io/SPF-SPs-metadata/page/master_qa_report.html[QA assessment report page]. The https://clarin-eric.github.io/SPF-SPs-metadata/page/master_qa_report.html[QA assessment report page] presents the current version of output to human consumers. This page is made available to SP operators and other stakeholders.
