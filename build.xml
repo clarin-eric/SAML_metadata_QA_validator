@@ -2,7 +2,8 @@
     name="SAML_metadata_QA_validator"
     default="validate"
     basedir="."
-    xmlns:unless="ant:unless">
+    xmlns:unless="ant:unless"
+    xmlns:if="ant:if">
     <description>
         SAML metadata QA validator for the CLARIN Service Provider Federation. Checks for common weaknesses in Security Assertion Markup Language metadata. Currently focused on SAML metadata about Service Providers. The guidelines to prevent these weaknesses can be read at https://www.clarin.eu/content/guidelines-saml-metadata-about-your-sp .
     </description>
@@ -12,14 +13,31 @@
     <property
         name="Saxon_JAR_path"
         location="../saxon/saxon9he.jar"/>
-    <target
-        name="validate">
-        <property unless:set="inFile" name="inFile" value="https://raw.githubusercontent.com/clarin-eric/SPF-SPs-metadata/master/clarin-sp-metadata.xml" />
+    <target name="validate">
+        <loadresource if:set="inputFile" property="inputURI">
+            <propertyresource name="inputFile"/>
+            <filterchain>
+                <tokenfilter>
+                    <replaceregex pattern="%" replace="%25" flags="g"/>
+                </tokenfilter>
+            </filterchain>
+        </loadresource>
+        <loadresource if:set="inputFile" property="outputPrefix">
+            <propertyresource name="inputFile"/>
+            <filterchain>
+                <tokenfilter>
+                    <replaceregex pattern="^.*\/" replace="" flags="g"/>
+                </tokenfilter>
+            </filterchain>
+        </loadresource>
+        <!-- Defaults -->
+        <property unless:set="inputFile" name="inputURI" value="https://raw.githubusercontent.com/clarin-eric/SPF-SPs-metadata/master/clarin-sp-metadata.xml" />
+        <property unless:set="outputPrefix" name="outputPrefix" value="master" />
         <echo>Schematron directory path: ${Schematron_dir_path}</echo>
         <echo>Saxon JAR path: ${Saxon_JAR_path}</echo>
         <get
-            src="${inFile}"
-            dest="out/master_sps_qa_report.xml"
+            src="${inputURI}"
+            dest="out/${outputPrefix}_sps_qa_report.xml"
             verbose="true"
             usetimestamp="true"/>
         
@@ -47,8 +65,8 @@
         <xslt
             basedir="."
             style="out/SAML_metadata_QA_validator.xsl"
-            in="out/master_sps_qa_report.xml"
-            out="out/master_sps_qa_report.svrlt">
+            in="out/${outputPrefix}_sps_qa_report.xml"
+            out="out/${outputPrefix}_sps_qa_report.svrlt">
             <classpath>
                 <pathelement
                     location="${Saxon_JAR_path}"/>
@@ -57,8 +75,8 @@
         <xslt
             basedir="."
             style="svrlt_to_simple_xml.xsl"
-            in="out/master_sps_qa_report.svrlt"
-            out="out/master_sps_qa_report_results.xml">
+            in="out/${outputPrefix}_sps_qa_report.svrlt"
+            out="out/${outputPrefix}_sps_qa_report_results.xml">
             <classpath>
                 <pathelement
                     location="${Saxon_JAR_path}"/>
