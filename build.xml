@@ -27,6 +27,7 @@
             <filterchain>
                 <tokenfilter>
                     <replaceregex pattern="^.*\/" replace="" flags="g"/>
+                    <replaceregex pattern="\.xml$" replace="" flags="g"/>
                 </tokenfilter>
             </filterchain>
         </loadresource>
