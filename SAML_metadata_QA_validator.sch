@@ -425,10 +425,10 @@
                 value="for $mailto_URI in $administrative_contactpersons/md:EmailAddress/text() return $mailto_URI cast as xs:anyURI"/>
             <sch:let
                 name="technical_mailto_URIs"
-                value="for $mailto_URI in $support_contactpersons/md:EmailAddress/text() return $mailto_URI cast as xs:anyURI"/>
+                value="for $mailto_URI in $technical_contactpersons/md:EmailAddress/text() return $mailto_URI cast as xs:anyURI"/>
             <sch:let
                 name="support_mailto_URIs"
-                value="for $mailto_URI in $technical_contactpersons/md:EmailAddress/text() return $mailto_URI cast as xs:anyURI"/>
+                value="for $mailto_URI in $support_contactpersons/md:EmailAddress/text() return $mailto_URI cast as xs:anyURI"/>
             <sch:assert
                 test="exists($administrative_mailto_URIs) and (every $mailto_URI in $administrative_mailto_URIs satisfies local:is_mailto_URI($mailto_URI))">
                 <sch:value-of
